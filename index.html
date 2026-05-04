@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Produtos - SS PARTS BRASIL</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #dc2626;
+            --accent-color: #f59e0b;
+            --dark-bg: #0f172a;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: #ffffff;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        header p {
+            font-size: 0.95rem;
+            opacity: 0.95;
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        .header-info {
+            text-align: right;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--light-bg) 0%, #ffffff 100%);
+            padding: 3rem 0;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        /* Category Section */
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .category-title h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .category-icon {
+            font-size: 2rem;
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-color);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #e2e8f0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: #cbd5e1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .product-content {
+            padding: 1.5rem;
+        }
+
+        .product-content h4 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .product-content p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .product-specs {
+            background-color: var(--light-bg);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .product-specs ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .product-specs li {
+            padding: 0.3rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .product-specs li:before {
+            content: "✓";
+            color: var(--secondary-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .product-badge {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.02);
+        }
+
+        .cta-button:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 4rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .contact-info {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .header-info {
+                text-align: center;
+                margin-top: 1rem;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            main {
+                padding: 2rem 0;
+            }
+
+            .category-section {
+                margin-bottom: 3rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .product-card:nth-child(1) { animation-delay: 0.1s; }
+        .product-card:nth-child(2) { animation-delay: 0.2s; }
+        .product-card:nth-child(3) { animation-delay: 0.3s; }
+        .product-card:nth-child(4) { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div>
+                <h1>SS PARTS BRASIL</h1>
+                <p>Catálogo de Produtos Especializados</p>
+            </div>
+            <div class="header-info">
+                <p><strong>Consultor Comercial</strong></p>
+                <p>ecommercelass04-droid</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Bem-vindo ao Nosso Catálogo</h2>
+            <p>Oferecemos soluções completas em movimentação de cargas e equipamentos especializados para suas necessidades de logística e construção.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+            <!-- Categoria 1: Transpalets -->
+            <section class="category-section">
+                <div class="category-title">
+                    <span class="category-icon">📦</span>
+                    <h3>Transpalets</h3>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">📦</div>
+                        <div class="product-content">
+                            <span class="product-badge">Manual</span>
+                            <h4>Transpalet Manual</h4>
+                            <p>Transpalet manual robusto para movimentação eficiente de paletes em ambientes internos e externos.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Capacidade até 2.500 kg</li>
+                                    <li>Garfos de aço reforçado</li>
+                                    <li>Rodas de poliuretano</li>
+                                    <li>Construção durável</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">⚡</div>
+                        <div class="product-content">
+                            <span class="product-badge">Elétrico</span>
+                            <h4>Transpalet Elétrico</h4>
+                            <p>Transpalet elétrico com motor potente, reduzindo o esforço físico e aumentando a produtividade.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Capacidade até 3.000 kg</li>
+                                    <li>Motor elétrico 48V</li>
+                                    <li>Bateria de longa duração</li>
+                                    <li>Direção assistida</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categoria 2: Empilhadeiras -->
+            <section class="category-section">
+                <div class="category-title">
+                    <span class="category-icon">🏗️</span>
+                    <h3>Empilhadeiras Patoladas</h3>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">🏗️</div>
+                        <div class="product-content">
+                            <span class="product-badge">Manual</span>
+                            <h4>Empilhadeira Patolada Manual</h4>
+                            <p>Empilhadeira patolada manual ideal para pequenos centros de distribuição e armazéns.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Capacidade até 1.500 kg</li>
+                                    <li>Altura de elevação até 2.000 mm</li>
+                                    <li>Base patolada estável</li>
+                                    <li>Fácil manuseio</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">⚙️</div>
+                        <div class="product-content">
+                            <span class="product-badge">Elétrica</span>
+                            <h4>Empilhadeira Patolada Elétrica</h4>
+                            <p>Empilhadeira patolada elétrica com movimentação automática e sistema de segurança avançado.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Capacidade até 2.500 kg</li>
+                                    <li>Altura de elevação até 3.500 mm</li>
+                                    <li>Motor elétrico silencioso</li>
+                                    <li>Controle de velocidade</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categoria 3: Pneus -->
+            <section class="category-section">
+                <div class="category-title">
+                    <span class="category-icon">🛞</span>
+                    <h3>Pneus para Empilhadeira</h3>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">🛞</div>
+                        <div class="product-content">
+                            <span class="product-badge">Pneumático</span>
+                            <h4>Pneus Pneumáticos</h4>
+                            <p>Pneus pneumáticos de alta resistência para empilhadeiras, com excelente aderência e durabilidade.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Aderência superior</li>
+                                    <li>Absorção de impactos</li>
+                                    <li>Uso em terrenos variados</li>
+                                    <li>Vida útil prolongada</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">⬛</div>
+                        <div class="product-content">
+                            <span class="product-badge">Maciço</span>
+                            <h4>Pneus Maciços</h4>
+                            <p>Pneus maciços sem câmara para operações contínuas em ambientes internos sem risco de furos.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Sem risco de furos</li>
+                                    <li>Manutenção reduzida</li>
+                                    <li>Durabilidade extrema</li>
+                                    <li>Ideal para uso intensivo</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Categoria 4: Esteiras -->
+            <section class="category-section">
+                <div class="category-title">
+                    <span class="category-icon">🚜</span>
+                    <h3>Esteiras para Mini Escavadeira</h3>
+                </div>
+                <div class="products-grid">
+                    <div class="product-card">
+                        <div class="product-image">🚜</div>
+                        <div class="product-content">
+                            <span class="product-badge">Premium</span>
+                            <h4>Esteiras de Borracha</h4>
+                            <p>Esteiras de borracha de alta qualidade para mini escavadeiras, com resistência e flexibilidade.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Material resistente</li>
+                                    <li>Flexibilidade otimizada</li>
+                                    <li>Menor ruído operacional</li>
+                                    <li>Proteção do solo</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">⛓️</div>
+                        <div class="product-content">
+                            <span class="product-badge">Industrial</span>
+                            <h4>Esteiras Reforçadas</h4>
+                            <p>Esteiras reforçadas com estrutura metálica para terrenos difíceis e operações pesadas.</p>
+                            <div class="product-specs">
+                                <ul>
+                                    <li>Estrutura reforçada</li>
+                                    <li>Alto desempenho</li>
+                                    <li>Terrenos acidentados</li>
+                                    <li>Longa durabilidade</li>
+                                </ul>
+                            </div>
+                            <button class="cta-button">Solicitar Informações</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p><strong>SS PARTS BRASIL</strong></p>
+            <p>Catálogo de Produtos Especializados em Movimentação e Logística</p>
+            <div class="contact-info">
+                <p>Consultor Comercial: ecommercelass04-droid</p>
+                <p>© 2026 SS PARTS BRASIL. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Adicionar interatividade aos botões
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('click', function() {
+                alert('Obrigado pelo interesse! Em breve entraremos em contato com você.');
+            });
+        });
+
+        // Smooth scroll para navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
